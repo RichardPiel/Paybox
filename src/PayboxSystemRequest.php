@@ -24,14 +24,14 @@ class PayboxSystemRequest
      * @param string $reference
      * @param string $email
      */
-    public function __construct(Money $amount, $reference, $email)
+    public function __construct(Money $amount, $reference, $email, $pbx_retour = false)
     {
         $this->values = [
             'PBX_TOTAL'   => $amount->getMinorAmount()->toInt(),
             'PBX_DEVISE'  => $amount->getCurrency()->getNumericCode(),
             'PBX_CMD'     => $reference,
             'PBX_PORTEUR' => $email,
-            'PBX_RETOUR'  => 'M:M;R:R;T:T;A:A;B:B;C:C;D:D;E:E;F:F;G:G;H:H;I:I;J:J;N:N;O:O;P:P;Q:Q;S:S;U:U;W:W;Y:Y;K:K',
+            'PBX_RETOUR'  => $pbx_retour ?? 'M:M;R:R;T:T;A:A;B:B;C:C;D:D;E:E;F:F;G:G;H:H;I:I;J:J;N:N;O:O;P:P;Q:Q;S:S;U:U;W:W;Y:Y;K:K',
             'PBX_HASH'    => 'SHA512',
             'PBX_TIME'    => gmdate('c'),
         ];
