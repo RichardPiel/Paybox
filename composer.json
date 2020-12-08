@@ -1,6 +1,6 @@
 {
-  "name": "benmorel/paybox",
-  "description": "Client library for the Paybox payment gateway",
+  "name": "richardpiel/paybox",
+  "description": "Client library for the Paybox payment gateway forked from benmorel/paybox",
   "type": "library",
   "keywords": [
     "Paybox",
