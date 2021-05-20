@@ -24,7 +24,7 @@ class PayboxSystemRequest
      * @param string $reference
      * @param string $email
      */
-    public function __construct(Money $amount, string $reference, string $email, string $pbx_retour = false, string $fake_error = null)
+    public function __construct(Money $amount, $reference, $email, $pbx_retour = false, $fake_error = null)
     {
         $this->values = [
             'PBX_TOTAL'   => $amount->getMinorAmount()->toInt(),
