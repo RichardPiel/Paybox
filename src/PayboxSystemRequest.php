@@ -24,7 +24,7 @@ class PayboxSystemRequest
      * @param string $reference
      * @param string $email
      */
-    public function __construct(Money $amount, $reference, $email, $pbx_retour = false)
+    public function __construct(Money $amount, string $reference, string $email, string $pbx_retour = false, string $fake_error = null)
     {
         $this->values = [
             'PBX_TOTAL'   => $amount->getMinorAmount()->toInt(),
@@ -35,6 +35,11 @@ class PayboxSystemRequest
             'PBX_HASH'    => 'SHA512',
             'PBX_TIME'    => gmdate('c'),
         ];
+
+        if ($fake_error) {
+            $this->values['PBX_ERRORCODETEST'] = $fake_error;
+        }
+
     }
 
     /**
