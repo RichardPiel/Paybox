@@ -2,8 +2,9 @@
 
 namespace Paybox;
 
-use Brick\Money\Currency;
 use Brick\Money\Money;
+use Paybox\ShoppingCart;
+use Brick\Money\Currency;
 
 /**
  * A request for payment to send to Paybox System.
@@ -24,8 +25,9 @@ class PayboxSystemRequest
      * @param string $reference
      * @param string $email
      * @param BillingAddress $billingAddress
+     * @param BillingAddress $billingAddress
      */
-    public function __construct(Money $amount, $reference, $email, BillingAddress $billingAddress = null, $pbx_retour = false, $fake_error = null)
+    public function __construct(Money $amount, $reference, $email, BillingAddress $billingAddress = null, ShoppingCart $shoppingCart = null, $pbx_retour = false, $fake_error = null)
     {
         $this->values = [
             'PBX_TOTAL'   => $amount->getMinorAmount()->toInt(),
@@ -43,6 +45,10 @@ class PayboxSystemRequest
         
         if ($billingAddress) {
             $this->values['PBX_BILLING'] = $billingAddress->getValues();
+        }
+        
+        if ($shoppingCart) {
+            $this->values['PBX_SHOPPINGCART'] = $shoppingCart->getValues();
         }
 
     }
