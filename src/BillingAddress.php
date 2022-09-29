@@ -76,7 +76,7 @@ class BillingAddress
     public function getValues(): string
     {
        
-        return str_replace(array("\r", "\n", " "), '', "
+        return str_replace(array("\r", "\n", "    "), '', "
             <Billing>
                 <Address>
                     <FirstName>{$this->firtName}</FirstName>
@@ -90,6 +90,5 @@ class BillingAddress
             </Billing>
         ");
     }
-
 
 }
