@@ -23,21 +23,26 @@ class PayboxSystemRequest
      * @param Money  $amount
      * @param string $reference
      * @param string $email
+     * @param BillingAddress $billingAddress
      */
-    public function __construct(Money $amount, $reference, $email, $pbx_retour = false, $fake_error = null)
+    public function __construct(Money $amount, $reference, $email, BillingAddress $billingAddress = null, $pbx_retour = false, $fake_error = null)
     {
         $this->values = [
             'PBX_TOTAL'   => $amount->getMinorAmount()->toInt(),
             'PBX_DEVISE'  => $amount->getCurrency()->getNumericCode(),
             'PBX_CMD'     => $reference,
             'PBX_PORTEUR' => $email,
-            'PBX_RETOUR'  => $pbx_retour ?? 'M:M;R:R;T:T;A:A;B:B;C:C;D:D;E:E;F:F;G:G;H:H;I:I;J:J;N:N;O:O;P:P;Q:Q;S:S;U:U;W:W;Y:Y;K:K',
+            'PBX_RETOUR'  => $pbx_retour ?? 'M:M;R:R;T:T;A:A;B:B;C:C;D:D;E:E;F:F;G:G;H:H;I:I;J:J;N:N;O:O;P:P;Q:Q;S:S;U:U;W:W;Y:Y;K:K;v:v',
             'PBX_HASH'    => 'SHA512',
             'PBX_TIME'    => gmdate('c'),
         ];
 
         if ($fake_error) {
             $this->values['PBX_ERRORCODETEST'] = $fake_error;
+        }
+        
+        if ($billingAddress) {
+            $this->values['PBX_BILLING'] = $billingAddress->getValues();
         }
 
     }
