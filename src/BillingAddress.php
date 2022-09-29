@@ -59,13 +59,13 @@ class BillingAddress
         string $city,
         string $country
     ) {
-        $this->firtName = $firtName;
-        $this->lastName = $lastName;
-        $this->address = $address;
-        $this->addressMore = $addressMore;
-        $this->zipCode = $zipCode;
-        $this->city = $city;
-        $this->country = $country;
+        $this->firtName = Utils::formatTextValue($firtName, 'ANP', 30);
+        $this->lastName = Utils::formatTextValue($lastName, 'ANP', 30);
+        $this->address = Utils::formatTextValue($address, 'ANS', 50);
+        $this->addressMore = Utils::formatTextValue($addressMore, 'ANS', 50);
+        $this->zipCode = Utils::formatTextValue($zipCode, 'ANS', 16);
+        $this->city = Utils::formatTextValue($city, 'ANS', 50);
+        $this->country = Utils::formatTextValue($country, 'N', 3);
     }
 
     /**
